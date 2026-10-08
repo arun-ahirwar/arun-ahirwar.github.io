@@ -1,6 +1,6 @@
 # Arun Living
 
-An English-language lifestyle journal for furniture, fashion, health, fitness, beauty, and home and decor. Designed for the GitHub Pages address `https://arun-ahirwar.github.io/`. It includes a visual article editing workflow through Pages CMS, SEO metadata, a sitemap, and robots.txt.
+An English-language lifestyle journal for furniture, fashion, health, fitness, beauty, home and decor, and electronics. Designed for the GitHub Pages address `https://arun-ahirwar.github.io/`. It includes a visual article editing workflow through Pages CMS, SEO metadata, a sitemap, and robots.txt.
 
 ## First publication
 

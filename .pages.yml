@@ -49,6 +49,8 @@ content:
               label: Beauty
             - name: home-and-decor
               label: Home & Decor
+            - name: electronics
+              label: Electronics
       - name: date
         label: Publication date
         type: date
