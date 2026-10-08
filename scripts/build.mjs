@@ -45,11 +45,13 @@ function articleMarkup(post) {
 }
 function validatePost(post, file) {
   for (const key of ['title','slug','description','category','body']) if(typeof post[key]!=='string'||!post[key].trim()) throw new Error(`${file}: ${key} is required.`);
-  if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(post.slug)) throw new Error(`${file}: URL name must use lowercase English letters, numbers and hyphens.`);
+  post.slug=post.slug.normalize('NFKD').toLowerCase().replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  if(!post.slug) throw new Error(`${file}: URL name must contain English letters or numbers.`);
   if(!categories.some(c=>c.slug===post.category)) throw new Error(`${file}: choose one of the six categories.`);
   if(!validDate(post.date)) throw new Error(`${file}: publication date must be a valid date.`);
   if(post.updated && (!validDate(post.updated) || validDate(post.updated)<validDate(post.date))) throw new Error(`${file}: updated date must be on or after publication date.`);
-  if(post.image && (!goodUrl(post.image)||!post.imageAlt?.trim())) throw new Error(`${file}: cover image needs a valid HTTPS/local URL and image description.`);
+  if(post.image && !goodUrl(post.image)) throw new Error(`${file}: cover image needs a valid HTTPS/local URL.`);
+  if(post.image) post.imageAlt=typeof post.imageAlt==='string'&&post.imageAlt.trim()?post.imageAlt.trim():post.title;
 }
 
 export async function build({root=process.cwd(),outDir=path.join(root,'dist'),now=new Date()}={}) {

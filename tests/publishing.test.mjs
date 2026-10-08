@@ -11,7 +11,7 @@ test('only published articles appear publicly; sitemap and pages update',async()
     await fs.mkdir(path.join(root,'content/articles'),{recursive:true});
     await fs.mkdir(path.join(root,'public'),{recursive:true});
     await fs.writeFile(path.join(root,'content/site.json'),JSON.stringify({title:'Arun Living',description:'A personal journal',tagline:'Everyday living',intro:'Welcome',author:'Arun Ahirwar',bio:'Writer',url:'https://arun-ahirwar.github.io',github:'https://github.com/arun-ahirwar'}));
-    const article={title:'Small rooms',slug:'small-rooms',description:'Practical small room ideas',category:'furniture',date:'2026-10-07',published:true,body:'<h2>Start here</h2><p>See <a href="/category/furniture/">furniture</a>.</p><script>alert(1)</script>'};
+    const article={title:'Small rooms',slug:'Small Rooms',description:'Practical small room ideas',category:'furniture',date:'2026-10-07',published:true,image:'/uploads/small-room.jpg',body:'<h2>Start here</h2><p>See <a href="/category/furniture/">furniture</a>.</p><script>alert(1)</script>'};
     await fs.writeFile(path.join(root,'content/articles','small-rooms.json'),JSON.stringify(article));
     await fs.writeFile(path.join(root,'content/articles','secret-draft.json'),JSON.stringify({...article,slug:'secret-draft',published:false}));
     const result=await build({root,now:new Date('2026-10-08T08:00:00Z')});
@@ -21,6 +21,7 @@ test('only published articles appear publicly; sitemap and pages update',async()
     const home=await fs.readFile(path.join(root,'dist/index.html'),'utf8');
     assert.match(html,/<h2 id="section-1">Start here<\/h2>/);
     assert.match(html,/href="\/category\/furniture\/"/);
+    assert.match(html,/alt="Small rooms"/);
     assert.doesNotMatch(html,/<script>alert/);
     assert.match(map,/articles\/small-rooms/);
     assert.doesNotMatch(map,/secret-draft/);
