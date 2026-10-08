@@ -1,0 +1,98 @@
+media:
+  input: public/uploads
+  output: /uploads
+  extensions: [jpg, jpeg, png, webp, avif, gif]
+  rename: safe
+content:
+  - name: articles
+    label: Articles
+    type: collection
+    path: content/articles
+    format: json
+    filename: "{fields.slug}.json"
+    subfolders: false
+    view:
+      primary: title
+      fields: [title, category, published, date]
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Article title
+        type: string
+        required: true
+      - name: slug
+        label: URL name
+        type: string
+        required: true
+        description: "Use English lowercase letters, numbers and hyphens, for example small-living-room-ideas. Keep this unchanged after publishing. Your article address is /articles/this-name/."
+      - name: description
+        label: Short summary / SEO description
+        type: text
+        required: true
+        description: "Summarise what the reader will learn, usually in one or two sentences."
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values:
+            - name: furniture
+              label: Furniture
+            - name: fashion
+              label: Fashion
+            - name: health
+              label: Health
+            - name: fitness
+              label: Fitness
+            - name: beauty
+              label: Beauty
+            - name: home-and-decor
+              label: Home & Decor
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+        options:
+          time: false
+      - name: updated
+        label: Last substantially updated (optional)
+        type: date
+        options:
+          time: false
+      - name: image
+        label: Cover image
+        type: image
+      - name: imageAlt
+        label: Describe the cover image
+        type: string
+        description: "Briefly describe what is in the image for readers using a screen reader."
+      - name: body
+        label: Write your article
+        type: rich-text
+        required: true
+        options:
+          format: html
+      - name: published
+        label: Published
+        type: boolean
+        default: false
+        description: "Turn on and save to publish. Turn off and save to remove it from the website. Draft files remain visible in this public GitHub repository. Future dates publish only on the next build after that date."
+  - name: settings
+    label: Website settings
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - {name: title, label: Blog name, type: string, required: true}
+      - {name: description, label: SEO description, type: text, required: true}
+      - {name: tagline, label: Homepage heading, type: string, required: true}
+      - {name: intro, label: Homepage introduction, type: text}
+      - {name: author, label: Author name, type: string, required: true}
+      - {name: bio, label: About the author, type: text}
+      - {name: url, label: Website address, type: string, readonly: true}
+      - {name: github, label: GitHub profile, type: string}
+      - name: searchConsoleVerification
+        label: Google Search Console verification code
+        type: string
+        description: "Paste only the content value from Google's HTML verification tag, not the whole tag."

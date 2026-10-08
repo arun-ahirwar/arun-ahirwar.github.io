@@ -1,0 +1,12 @@
+{
+  "title": "Editor practice — your first article",
+  "slug": "editor-practice",
+  "description": "A practice draft for trying headings, lists, links and images. Replace it with your own article before publishing.",
+  "category": "home-and-decor",
+  "published": false,
+  "date": "2026-10-08",
+  "updated": "",
+  "image": "",
+  "imageAlt": "",
+  "body": "<p>This is an unpublished practice draft. Replace this text with your own article before switching Published on.</p><h2>Add a section heading</h2><p>Select text to make it <strong>bold</strong> or <em>italic</em>. Use the link button to add an <a href=\"/category/furniture/\">internal link</a>.</p><h3>Add a smaller heading</h3><ul><li>A first bullet point</li><li>A second bullet point</li></ul><ol><li>First step</li><li>Second step</li></ol><blockquote>A useful quotation, with its source.</blockquote>"
+}
